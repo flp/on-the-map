@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  LoginViewController.swift
 //  On the Map
 //
 //  Created by Franklin Pearsall on 4/26/16.
@@ -11,31 +11,38 @@ import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 
-class ViewController: UIViewController, FBSDKLoginButtonDelegate {
+class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-//        let username = "username@domain.com"
-//        let password = "********"
-//        UdacityClient.sharedInstance().login(username, password: password) { userDetails, error in
-//            guard let userDetails = userDetails else {
-//                print("error!")
-//                return
-//            }
-//            
-//            print(userDetails)
-//        }
         
-        let loginButton: FBSDKLoginButton = FBSDKLoginButton()
-        loginButton.center = self.view.center
-        loginButton.delegate = self
-        self.view.addSubview(loginButton)
+        let fbLoginButton: FBSDKLoginButton = FBSDKLoginButton()
+        fbLoginButton.center = CGPoint(x: self.view.center.x, y: self.view.frame.height - 30)
+        fbLoginButton.delegate = self
+        self.view.addSubview(fbLoginButton)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func login(sender: AnyObject) {
+        let username = emailTextField.text!
+        let password = passwordTextField.text!
+        UdacityClient.sharedInstance().login(username, password: password) { userDetails, error in
+            guard let userDetails = userDetails else {
+                print("error!")
+                return
+            }
+            
+            print(userDetails)
+        }
+
     }
     
     // MARK: FBSDKLoginButtonDelegate
