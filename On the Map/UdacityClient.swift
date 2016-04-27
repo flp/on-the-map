@@ -13,18 +13,22 @@ class UdacityClient: NSObject {
     let httpClient = HttpClient.sharedInstance()
     
     func login(username: String, password: String, completionHandler: (userDetails: UserDetails!, error: NSError?) -> Void) {
+        let request = usernamePasswordLoginRequest(username, password: password)
+        loginWithRequest(request, completionHandler: completionHandler)
+    }
+    
+    func loginWithFacebook(accessToken: String, completionHandler: (userDetails: UserDetails!, error: NSError?) -> Void) {
+        let request = facebookTokenLoginRequest(accessToken)
+        loginWithRequest(request, completionHandler: completionHandler)
+    }
+    
+    private func loginWithRequest(request: NSMutableURLRequest, completionHandler: (userDetails: UserDetails!, error: NSError?) -> Void) {
         
         func sendError(error: String) {
             print(error)
             let userInfo = [NSLocalizedDescriptionKey : error]
             completionHandler(userDetails: nil, error: NSError(domain: "login", code: 1, userInfo: userInfo))
         }
-        
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/session")!)
-        request.HTTPMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.HTTPBody = "{\"udacity\": {\"username\": \"\(username)\", \"password\": \"\(password)\"}}".dataUsingEncoding(NSUTF8StringEncoding)
         
         httpClient.taskForRequest(request) { result, error in
             if let error = error {
@@ -44,6 +48,24 @@ class UdacityClient: NSObject {
                 return
             }
         }
+    }
+    
+    private func usernamePasswordLoginRequest(username: String, password: String) -> NSMutableURLRequest {
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/session")!)
+        request.HTTPMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.HTTPBody = "{\"udacity\": {\"username\": \"\(username)\", \"password\": \"\(password)\"}}".dataUsingEncoding(NSUTF8StringEncoding)
+        return request
+    }
+    
+    private func facebookTokenLoginRequest(accessToken: String) -> NSMutableURLRequest {
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/session")!)
+        request.HTTPMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.HTTPBody = "{\"facebook_mobile\": {\"access_token\": \"\(accessToken);\"}}".dataUsingEncoding(NSUTF8StringEncoding)
+        return request
     }
     
     private func getUserDetails(userId: String, completionHandler: (userDetails: UserDetails!, error: NSError?) -> Void) {
