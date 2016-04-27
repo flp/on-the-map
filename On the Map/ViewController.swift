@@ -13,6 +13,16 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        let username = "username@domain.com"
+        let password = "********"
+        UdacityClient.sharedInstance().login(username, password: password) { userDetails, error in
+            guard let userDetails = userDetails else {
+                print("error!")
+                return
+            }
+            
+            print(userDetails)
+        }
     }
 
     override func didReceiveMemoryWarning() {
