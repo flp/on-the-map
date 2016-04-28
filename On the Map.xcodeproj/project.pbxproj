@@ -18,6 +18,10 @@
 		7D29FDA21CD0308900264F2B /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D29FDA11CD0308900264F2B /* UdacityClient.swift */; };
 		7D29FDA51CD1582900264F2B /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D29FDA41CD1582900264F2B /* FBSDKCoreKit.framework */; };
 		7D29FDA71CD15B5000264F2B /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D29FDA61CD15B5000264F2B /* FBSDKLoginKit.framework */; };
+		7D3236F91CD18AC700011A22 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3236F81CD18AC700011A22 /* MapViewController.swift */; };
+		7D3236FB1CD18B1500011A22 /* PinListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3236FA1CD18B1500011A22 /* PinListViewController.swift */; };
+		7D3236FD1CD18BF700011A22 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3236FC1CD18BF700011A22 /* TabBarViewController.swift */; };
+		7D3236FF1CD199F800011A22 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D3236FE1CD199F800011A22 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +59,10 @@
 		7D29FDA11CD0308900264F2B /* UdacityClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityClient.swift; sourceTree = "<group>"; };
 		7D29FDA41CD1582900264F2B /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../../Documents/FacebookSDKs-iOS-20160412/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		7D29FDA61CD15B5000264F2B /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../../../Documents/FacebookSDKs-iOS-20160412/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
+		7D3236F81CD18AC700011A22 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		7D3236FA1CD18B1500011A22 /* PinListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinListViewController.swift; sourceTree = "<group>"; };
+		7D3236FC1CD18BF700011A22 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		7D3236FE1CD199F800011A22 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +71,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D29FDA71CD15B5000264F2B /* FBSDKLoginKit.framework in Frameworks */,
+				7D3236FF1CD199F800011A22 /* MapKit.framework in Frameworks */,
 				7D29FDA51CD1582900264F2B /* FBSDKCoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -157,6 +166,9 @@
 			isa = PBXGroup;
 			children = (
 				7D29FD6D1CCFEA2F00264F2B /* LoginViewController.swift */,
+				7D3236F81CD18AC700011A22 /* MapViewController.swift */,
+				7D3236FA1CD18B1500011A22 /* PinListViewController.swift */,
+				7D3236FC1CD18BF700011A22 /* TabBarViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -181,6 +193,7 @@
 		7D29FDA31CD157BE00264F2B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7D3236FE1CD199F800011A22 /* MapKit.framework */,
 				7D29FDA61CD15B5000264F2B /* FBSDKLoginKit.framework */,
 				7D29FDA41CD1582900264F2B /* FBSDKCoreKit.framework */,
 			);
@@ -255,6 +268,11 @@
 				TargetAttributes = {
 					7D29FD671CCFEA2F00264F2B = {
 						CreatedOnToolsVersion = 7.3;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					7D29FD7B1CCFEA2F00264F2B = {
 						CreatedOnToolsVersion = 7.3;
@@ -320,7 +338,10 @@
 			files = (
 				7D29FDA21CD0308900264F2B /* UdacityClient.swift in Sources */,
 				7D29FD6E1CCFEA2F00264F2B /* LoginViewController.swift in Sources */,
+				7D3236FB1CD18B1500011A22 /* PinListViewController.swift in Sources */,
 				7D29FD9E1CD0307600264F2B /* HttpClient.swift in Sources */,
+				7D3236FD1CD18BF700011A22 /* TabBarViewController.swift in Sources */,
+				7D3236F91CD18AC700011A22 /* MapViewController.swift in Sources */,
 				7D29FD6C1CCFEA2F00264F2B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -548,6 +569,7 @@
 				7D29FD921CCFEA2F00264F2B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7D29FD931CCFEA2F00264F2B /* Build configuration list for PBXNativeTarget "On the MapTests" */ = {
 			isa = XCConfigurationList;
@@ -556,6 +578,7 @@
 				7D29FD951CCFEA2F00264F2B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7D29FD961CCFEA2F00264F2B /* Build configuration list for PBXNativeTarget "On the MapUITests" */ = {
 			isa = XCConfigurationList;
@@ -564,6 +587,7 @@
 				7D29FD981CCFEA2F00264F2B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
