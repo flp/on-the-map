@@ -10,6 +10,8 @@ import UIKit
 
 class TabBarViewController: UITabBarController {
     
+    var students: [StudentLocation]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }

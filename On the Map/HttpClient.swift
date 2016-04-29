@@ -12,7 +12,7 @@ class HttpClient: NSObject {
     
     let session = NSURLSession.sharedSession()
     
-    func taskForRequest(request: NSURLRequest, completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
+    func taskForRequest(request: NSURLRequest, completionHandler: (result: NSData!, error: NSError?) -> Void) -> NSURLSessionDataTask {
         
         let task = session.dataTaskWithRequest(request) { (data, response, error) in
             

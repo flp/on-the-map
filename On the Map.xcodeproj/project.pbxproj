@@ -22,6 +22,8 @@
 		7D3236FB1CD18B1500011A22 /* PinListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3236FA1CD18B1500011A22 /* PinListViewController.swift */; };
 		7D3236FD1CD18BF700011A22 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3236FC1CD18BF700011A22 /* TabBarViewController.swift */; };
 		7D3236FF1CD199F800011A22 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D3236FE1CD199F800011A22 /* MapKit.framework */; };
+		7D3237041CD2C75F00011A22 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3237031CD2C75F00011A22 /* ParseClient.swift */; };
+		7D3237061CD31E1D00011A22 /* StudentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3237051CD31E1D00011A22 /* StudentLocation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +65,8 @@
 		7D3236FA1CD18B1500011A22 /* PinListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinListViewController.swift; sourceTree = "<group>"; };
 		7D3236FC1CD18BF700011A22 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		7D3236FE1CD199F800011A22 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		7D3237031CD2C75F00011A22 /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
+		7D3237051CD31E1D00011A22 /* StudentLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentLocation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				7D29FD6A1CCFEA2F00264F2B /* On the Map */,
+				7D29FD9C1CD0306900264F2B /* Clients */,
 				7D29FD7F1CCFEA2F00264F2B /* On the MapTests */,
 				7D29FD8A1CCFEA2F00264F2B /* On the MapUITests */,
 				7D29FD691CCFEA2F00264F2B /* Products */,
@@ -150,7 +155,7 @@
 		7D29FD991CD0302200264F2B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7D29FD9C1CD0306900264F2B /* Clients */,
+				7D3237051CD31E1D00011A22 /* StudentLocation.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -166,9 +171,9 @@
 			isa = PBXGroup;
 			children = (
 				7D29FD6D1CCFEA2F00264F2B /* LoginViewController.swift */,
+				7D3236FC1CD18BF700011A22 /* TabBarViewController.swift */,
 				7D3236F81CD18AC700011A22 /* MapViewController.swift */,
 				7D3236FA1CD18B1500011A22 /* PinListViewController.swift */,
-				7D3236FC1CD18BF700011A22 /* TabBarViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -176,10 +181,12 @@
 		7D29FD9C1CD0306900264F2B /* Clients */ = {
 			isa = PBXGroup;
 			children = (
+				7D3237001CD2C6FE00011A22 /* Parse */,
 				7D29FDA01CD0307E00264F2B /* Udacity */,
 				7D29FD9D1CD0307600264F2B /* HttpClient.swift */,
 			);
 			name = Clients;
+			path = "On the Map";
 			sourceTree = "<group>";
 		};
 		7D29FDA01CD0307E00264F2B /* Udacity */ = {
@@ -198,6 +205,14 @@
 				7D29FDA41CD1582900264F2B /* FBSDKCoreKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7D3237001CD2C6FE00011A22 /* Parse */ = {
+			isa = PBXGroup;
+			children = (
+				7D3237031CD2C75F00011A22 /* ParseClient.swift */,
+			);
+			name = Parse;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -342,7 +357,9 @@
 				7D29FD9E1CD0307600264F2B /* HttpClient.swift in Sources */,
 				7D3236FD1CD18BF700011A22 /* TabBarViewController.swift in Sources */,
 				7D3236F91CD18AC700011A22 /* MapViewController.swift in Sources */,
+				7D3237041CD2C75F00011A22 /* ParseClient.swift in Sources */,
 				7D29FD6C1CCFEA2F00264F2B /* AppDelegate.swift in Sources */,
+				7D3237061CD31E1D00011A22 /* StudentLocation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

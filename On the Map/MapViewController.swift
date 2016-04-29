@@ -13,10 +13,19 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var map: MKMapView!
     
+    var students: [StudentLocation] {
+        get {
+            let tabBarController = self.tabBarController as! TabBarViewController
+            return tabBarController.students!
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.map.delegate = self
+        
+        self.map.addAnnotations(students)
     }
     
 }

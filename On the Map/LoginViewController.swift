@@ -41,31 +41,40 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         let password = passwordTextField.text!
         UdacityClient.sharedInstance().login(username, password: password) { userDetails, error in
             
-            dispatch_async(dispatch_get_main_queue()) {
-                self.setNetworkActivityUI(false)
-            }
-            
             guard let userDetails = userDetails else {
                 print("error: \(error)")
                 return
             }
             
-            dispatch_async(dispatch_get_main_queue()) {
-                self.completeLogin(userDetails)
-            }
+            self.completeLogin(userDetails)
         }
 
     }
     
     private func completeLogin(userDetails: UserDetails) {
         print(userDetails)
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.userDetails = userDetails
         
-        let controller = self.storyboard?.instantiateViewControllerWithIdentifier("TabBarViewController") as! TabBarViewController
-        self.presentViewController(controller, animated: true) {
-            // TODO: should we dismiss, or stick around for logout event?
+        ParseClient.sharedInstance().fetchEntries { students, error in
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                self.setNetworkActivityUI(false)
+            }
+            
+            // TODO: handle error
+            
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            appDelegate.userDetails = userDetails
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                let controller = self.storyboard?.instantiateViewControllerWithIdentifier("TabBarViewController") as! TabBarViewController
+                controller.students = students
+                self.presentViewController(controller, animated: true) {
+                    // TODO: should we dismiss the login view, or stick around for logout event?
+                }
+            }
         }
+        
+        
     }
     
     private func setNetworkActivityUI(enabled: Bool) {
@@ -90,18 +99,12 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         UdacityClient.sharedInstance().loginWithFacebook(FBSDKAccessToken.currentAccessToken().tokenString) { userDetails, error in
             
-            dispatch_async(dispatch_get_main_queue()) {
-                self.setNetworkActivityUI(false)
-            }
-            
             guard let userDetails = userDetails else {
                 print("error: \(error)")
                 return
             }
             
-            dispatch_async(dispatch_get_main_queue()) {
-                self.completeLogin(userDetails)
-            }
+            self.completeLogin(userDetails)
         }
     }
     
