@@ -28,4 +28,27 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         self.map.addAnnotations(students)
     }
     
+    // MARK: MKMapViewDelegate
+    
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        let studentLocation = annotation as! StudentLocation
+        let identifier = "pin"
+        var view: MKPinAnnotationView
+        if let dequeuedView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier) as? MKPinAnnotationView {
+            dequeuedView.annotation = studentLocation
+            view = dequeuedView
+        } else {
+            view = MKPinAnnotationView(annotation: studentLocation, reuseIdentifier: identifier)
+            view.canShowCallout = true
+            view.calloutOffset = CGPoint(x: -5, y: 5)
+            view.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure) as UIView
+        }
+        return view
+    }
+    
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        let studentLocation = view.annotation as! StudentLocation
+        UIApplication.sharedApplication().openURL(NSURL(string: studentLocation.mediaURL)!)
+    }
+    
 }

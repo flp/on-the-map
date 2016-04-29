@@ -38,4 +38,16 @@ class StudentLocation: NSObject, MKAnnotation {
         }
     }
     
+    var title: String? {
+        get {
+            return "\(firstName) \(lastName)"
+        }
+    }
+    
+    var subtitle: String? {
+        get {
+            return mediaURL
+        }
+    }
+    
 }
