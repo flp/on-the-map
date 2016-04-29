@@ -50,4 +50,12 @@ class StudentLocation: NSObject, MKAnnotation {
         }
     }
     
+    func openStudentURL() -> Bool {
+        if let nsurl = NSURL(string: mediaURL) {
+            return UIApplication.sharedApplication().openURL(nsurl)
+        }
+        
+        return false
+    }
+    
 }

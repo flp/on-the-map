@@ -34,4 +34,15 @@ class PinListViewController: UITableViewController {
         return cell
     }
     
+    // MARK: UITableViewDelegate
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let studentLocation = students[indexPath.row]
+        if !studentLocation.openStudentURL() {
+            print("Failed to open url: \(studentLocation.mediaURL)")
+        }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+    }
+    
 }

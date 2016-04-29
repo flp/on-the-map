@@ -48,7 +48,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         let studentLocation = view.annotation as! StudentLocation
-        UIApplication.sharedApplication().openURL(NSURL(string: studentLocation.mediaURL)!)
+        if !studentLocation.openStudentURL() {
+            print("Failed to open url: \(studentLocation.mediaURL)")
+        }
     }
     
 }
