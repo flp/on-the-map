@@ -59,3 +59,29 @@ class StudentLocation: NSObject, MKAnnotation {
     }
     
 }
+
+class TemporaryPin: NSObject, MKAnnotation {
+    var latitude: Float
+    var longitude: Float
+    
+    init(latitude: Float, longitude: Float) {
+        self.latitude = latitude
+        self.longitude = longitude
+    }
+    
+    var coordinate: CLLocationCoordinate2D {
+        get {
+            return CLLocationCoordinate2D(latitude: Double(self.latitude), longitude: Double(self.longitude))
+        }
+    }
+}
+
+struct NewStudentLocation {
+    var uniqueKey: String
+    var firstName: String
+    var lastName: String
+    var mapString: String
+    var mediaURL: String
+    var latitude: Float
+    var longitude: Float
+}

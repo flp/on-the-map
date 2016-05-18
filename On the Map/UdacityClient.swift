@@ -91,7 +91,7 @@ class UdacityClient: NSObject {
             
             if let user = parsedResult["user"] as? [String:AnyObject], let firstName = user["first_name"] as? String, lastName = user["last_name"] as? String {
                 
-                completionHandler(userDetails: UserDetails(firstName: firstName, lastName: lastName), error: nil)
+                completionHandler(userDetails: UserDetails(firstName: firstName, lastName: lastName, userId: userId, parseOjbectId: nil), error: nil)
             } else {
                 sendError("Cannot find first name and last name in \(parsedResult)")
             }
@@ -120,4 +120,6 @@ class UdacityClient: NSObject {
 struct UserDetails {
     let firstName: String
     let lastName: String
+    let userId: String
+    var parseOjbectId: String?
 }

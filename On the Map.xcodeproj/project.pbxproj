@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D0D133E1CE3DC6F003B2C77 /* NewPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D133D1CE3DC6F003B2C77 /* NewPinViewController.swift */; };
+		7D2892421CD701050038884B /* LocationDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2892411CD701050038884B /* LocationDisplayViewController.swift */; };
 		7D29FD6C1CCFEA2F00264F2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D29FD6B1CCFEA2F00264F2B /* AppDelegate.swift */; };
 		7D29FD6E1CCFEA2F00264F2B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D29FD6D1CCFEA2F00264F2B /* LoginViewController.swift */; };
 		7D29FD711CCFEA2F00264F2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D29FD6F1CCFEA2F00264F2B /* Main.storyboard */; };
@@ -44,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7D0D133D1CE3DC6F003B2C77 /* NewPinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPinViewController.swift; sourceTree = "<group>"; };
+		7D2892411CD701050038884B /* LocationDisplayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationDisplayViewController.swift; sourceTree = "<group>"; };
 		7D29FD681CCFEA2F00264F2B /* On the Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "On the Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D29FD6B1CCFEA2F00264F2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7D29FD6D1CCFEA2F00264F2B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -174,6 +178,8 @@
 				7D3236FC1CD18BF700011A22 /* TabBarViewController.swift */,
 				7D3236F81CD18AC700011A22 /* MapViewController.swift */,
 				7D3236FA1CD18B1500011A22 /* PinListViewController.swift */,
+				7D2892411CD701050038884B /* LocationDisplayViewController.swift */,
+				7D0D133D1CE3DC6F003B2C77 /* NewPinViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -358,7 +364,9 @@
 				7D3236FD1CD18BF700011A22 /* TabBarViewController.swift in Sources */,
 				7D3236F91CD18AC700011A22 /* MapViewController.swift in Sources */,
 				7D3237041CD2C75F00011A22 /* ParseClient.swift in Sources */,
+				7D0D133E1CE3DC6F003B2C77 /* NewPinViewController.swift in Sources */,
 				7D29FD6C1CCFEA2F00264F2B /* AppDelegate.swift in Sources */,
+				7D2892421CD701050038884B /* LocationDisplayViewController.swift in Sources */,
 				7D3237061CD31E1D00011A22 /* StudentLocation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

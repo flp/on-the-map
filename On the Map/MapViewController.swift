@@ -9,9 +9,13 @@
 import MapKit
 import UIKit
 
-class MapViewController: UIViewController, MKMapViewDelegate {
+class MapViewController: LocationDisplayViewController, MKMapViewDelegate {
     
     @IBOutlet weak var map: MKMapView!
+    @IBOutlet weak var activityIndicatorOutlet: UIActivityIndicatorView!
+    @IBOutlet weak var logoutButtonOutlet: UIBarButtonItem!
+    @IBOutlet weak var newPinButtonOutlet: UIBarButtonItem!
+    @IBOutlet weak var refreshButtonOutlet: UIBarButtonItem!
     
     var students: [StudentLocation] {
         get {
@@ -23,9 +27,32 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.activityIndicator = activityIndicatorOutlet
+        self.logoutButton = logoutButtonOutlet
+        self.newPinButton = newPinButtonOutlet
+        self.refreshButton = refreshButtonOutlet
+        self.mapTabButton = tabBarController?.tabBar.items![0]
+        self.listTabButton = tabBarController?.tabBar.items![1]
+        
+        self.activityIndicator.hidden = true
+        
         self.map.delegate = self
         
         self.map.addAnnotations(students)
+    }
+    
+    // BarButtons
+    
+    @IBAction func logout(sender: AnyObject) {
+        super.logout()
+    }
+    
+    @IBAction func newPin(sender: AnyObject) {
+        super.newPin()
+    }
+    
+    @IBAction func refreshPins(sender: AnyObject) {
+        super.refreshPins()
     }
     
     // MARK: MKMapViewDelegate
