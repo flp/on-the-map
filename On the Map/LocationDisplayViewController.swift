@@ -8,6 +8,9 @@
 
 import UIKit
 
+import FBSDKCoreKit
+import FBSDKLoginKit
+
 class LocationDisplayViewController: UIViewController {
     
     var activityIndicator: UIActivityIndicatorView!
@@ -87,7 +90,34 @@ class LocationDisplayViewController: UIViewController {
     }
     
     func logout() {
-        print("logout")
+        if FBSDKAccessToken.currentAccessToken() != nil {
+            let fbMgr = FBSDKLoginManager.init()
+            fbMgr.logOut()
+            self.dismissViewControllerAnimated(true, completion: nil)
+        } else {
+            setNetworkActivityUI(true)
+            UdacityClient.sharedInstance().logout { success, error in
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.setNetworkActivityUI(false)
+                }
+                
+                if !success {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        let message = "Could not logout of Udacity"
+                        let alert = UIAlertController(title: nil, message: message, preferredStyle: .Alert)
+                        let action = UIAlertAction(title: "Okay", style: .Default, handler: nil)
+                        alert.addAction(action)
+                        self.presentViewController(alert, animated: true, completion: nil)
+                    }
+                    return
+                }
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                }
+            }
+        }
     }
     
     private func setNetworkActivityUI(enabled: Bool) {

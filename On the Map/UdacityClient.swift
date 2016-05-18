@@ -22,12 +22,41 @@ class UdacityClient: NSObject {
         loginWithRequest(request, completionHandler: completionHandler)
     }
     
+    func logout(completionHandler: (success: Bool, error: NSError?) -> Void) {
+        
+        func sendError(error: String) {
+            print(error)
+            let userInfo = [NSLocalizedDescriptionKey : error]
+            completionHandler(success: false, error: NSError(domain: "logout", code: 1, userInfo: userInfo))
+        }
+        
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/session")!)
+        request.HTTPMethod = "DELETE"
+        var xsrfCookie: NSHTTPCookie? = nil
+        let sharedCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+        for cookie in sharedCookieStorage.cookies! {
+            if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+        }
+        if let xsrfCookie = xsrfCookie {
+            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+        }
+        
+        httpClient.taskForRequest(request) { result, error in
+            if let error = error {
+                sendError("There was an error during logout: \(error)")
+                return
+            }
+            
+            completionHandler(success: true, error: nil)
+        }
+    }
+    
     private func loginWithRequest(request: NSMutableURLRequest, completionHandler: (userDetails: UserDetails!, error: NSError?) -> Void) {
         
         func sendError(error: String) {
             print(error)
             let userInfo = [NSLocalizedDescriptionKey : error]
-            completionHandler(userDetails: nil, error: NSError(domain: "login", code: 1, userInfo: userInfo))
+            completionHandler(userDetails: nil, error: NSError(domain: "loginWithRequest", code: 1, userInfo: userInfo))
         }
         
         httpClient.taskForRequest(request) { result, error in
@@ -73,7 +102,7 @@ class UdacityClient: NSObject {
         func sendError(error: String) {
             print(error)
             let userInfo = [NSLocalizedDescriptionKey : error]
-            completionHandler(userDetails: nil, error: NSError(domain: "login", code: 1, userInfo: userInfo))
+            completionHandler(userDetails: nil, error: NSError(domain: "getUserDetails", code: 1, userInfo: userInfo))
         }
         
         let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/users/\(userId)")!)

@@ -29,11 +29,6 @@ class MapViewController: LocationDisplayViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let c1 = self.tabBarController!.childViewControllers[0] as! UINavigationController
-        let c2 = self.tabBarController!.childViewControllers[1] as! UINavigationController
-        print(c1.topViewController!)
-        print(c2.topViewController!)
-        
         self.activityIndicator = activityIndicatorOutlet
         self.logoutButton = logoutButtonOutlet
         self.newPinButton = newPinButtonOutlet
