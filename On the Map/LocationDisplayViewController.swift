@@ -104,7 +104,7 @@ class LocationDisplayViewController: UIViewController {
                 
                 if !success {
                     dispatch_async(dispatch_get_main_queue()) {
-                        let message = "Could not logout of Udacity"
+                        let message = "Could not logout from Udacity"
                         let alert = UIAlertController(title: nil, message: message, preferredStyle: .Alert)
                         let action = UIAlertAction(title: "Okay", style: .Default, handler: nil)
                         alert.addAction(action)

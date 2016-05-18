@@ -106,9 +106,6 @@ class ParseClient: NSObject {
                 if studentResults.isEmpty {
                     print("No user exists for \(uniqueKey)")
                     completionHandler(userDetails: nil, error: nil)
-                    // TODO: remove hack
-//                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-//                    completionHandler(userDetails: appDelegate.userDetails!, error: nil)
                 } else {
                     print("User already exists for \(uniqueKey)")
                     
@@ -169,7 +166,7 @@ class ParseClient: NSObject {
                 if let _ = parsedResult["updatedAt"] as? String {
                     completionHandler(success: true, error: nil)
                 } else {
-                    sendError("There was an error PUTing student locßation: \(parsedResult)")
+                    sendError("There was an error PUTing student location: \(parsedResult)")
                     return
                 }
             } else {
