@@ -10,10 +10,13 @@ import UIKit
 
 class PinListViewController: LocationDisplayViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet var tableView: UITableView!
     @IBOutlet var activityIndicatorOutlet: UIActivityIndicatorView!
     @IBOutlet weak var logoutButtonOutlet: UIBarButtonItem!
     @IBOutlet weak var newPinButtonOutlet: UIBarButtonItem!
     @IBOutlet weak var refreshButtonOutlet: UIBarButtonItem!
+    
+    var newDataFlag = false
     
     var students: [StudentLocation] {
         get {
@@ -35,6 +38,27 @@ class PinListViewController: LocationDisplayViewController, UITableViewDelegate,
         self.activityIndicator.hidden = true
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        if appDelegate.newLocationFlag {
+            super.refresh {
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.tableView.reloadData()
+                    
+                    let nav = self.tabBarController!.childViewControllers[0] as! UINavigationController
+                    let mapController = nav.topViewController as! MapViewController
+                    mapController.newDataFlag = true
+                    appDelegate.newLocationFlag = false
+                }
+            }
+        } else if newDataFlag {
+            self.tableView.reloadData()
+            newDataFlag = false
+        }
+    }
+    
     // BarButtons
     
     @IBAction func logout(sender: AnyObject) {
@@ -45,8 +69,16 @@ class PinListViewController: LocationDisplayViewController, UITableViewDelegate,
         super.newPin()
     }
     
-    @IBAction func refresh(sender: AnyObject) {
-        super.refreshPins()
+    @IBAction func refreshPins(sender: AnyObject) {
+        super.refresh {
+            dispatch_async(dispatch_get_main_queue()) {
+                self.tableView.reloadData()
+                
+                let nav = self.tabBarController!.childViewControllers[0] as! UINavigationController
+                let mapController = nav.topViewController as! MapViewController
+                mapController.newDataFlag = true
+            }
+        }
     }
     
     // MARK: UITableViewDataSource

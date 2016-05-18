@@ -153,7 +153,7 @@ class NewPinViewController: UIViewController, UITextFieldDelegate {
             }
             
             dispatch_async(dispatch_get_main_queue()) {
-                appDelegate.newLocation = studentLocation
+                appDelegate.newLocationFlag = true
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
         }

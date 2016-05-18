@@ -64,8 +64,26 @@ class LocationDisplayViewController: UIViewController {
         }
     }
     
-    func refreshPins() {
-        print("refresh pins")
+    func refresh(completionHandler: () -> Void) {
+        setNetworkActivityUI(true)
+        
+        ParseClient.sharedInstance().fetchEntries { students, error in
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                self.setNetworkActivityUI(false)
+            }
+            
+            if let error = error {
+                print("error refreshing student locations: \(error)")
+                return
+            }
+            
+            let tabBarController = self.tabBarController as! TabBarViewController
+            tabBarController.students = students
+            
+            completionHandler()
+            
+        }
     }
     
     func logout() {

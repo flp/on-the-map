@@ -17,6 +17,8 @@ class MapViewController: LocationDisplayViewController, MKMapViewDelegate {
     @IBOutlet weak var newPinButtonOutlet: UIBarButtonItem!
     @IBOutlet weak var refreshButtonOutlet: UIBarButtonItem!
     
+    var newDataFlag = false
+    
     var students: [StudentLocation] {
         get {
             let tabBarController = self.tabBarController as! TabBarViewController
@@ -26,6 +28,11 @@ class MapViewController: LocationDisplayViewController, MKMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let c1 = self.tabBarController!.childViewControllers[0] as! UINavigationController
+        let c2 = self.tabBarController!.childViewControllers[1] as! UINavigationController
+        print(c1.topViewController!)
+        print(c2.topViewController!)
         
         self.activityIndicator = activityIndicatorOutlet
         self.logoutButton = logoutButtonOutlet
@@ -41,6 +48,29 @@ class MapViewController: LocationDisplayViewController, MKMapViewDelegate {
         self.map.addAnnotations(students)
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        if appDelegate.newLocationFlag {
+            super.refresh {
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.map.removeAnnotations(self.map.annotations)
+                    self.map.addAnnotations(self.students)
+                    
+                    let nav = self.tabBarController!.childViewControllers[1] as! UINavigationController
+                    let pinListController = nav.topViewController as! PinListViewController
+                    pinListController.newDataFlag = true
+                    appDelegate.newLocationFlag = false
+                }
+            }
+        } else if newDataFlag {
+            self.map.removeAnnotations(self.map.annotations)
+            self.map.addAnnotations(self.students)
+            newDataFlag = false
+        }
+    }
+    
     // BarButtons
     
     @IBAction func logout(sender: AnyObject) {
@@ -52,7 +82,16 @@ class MapViewController: LocationDisplayViewController, MKMapViewDelegate {
     }
     
     @IBAction func refreshPins(sender: AnyObject) {
-        super.refreshPins()
+        super.refresh {
+            dispatch_async(dispatch_get_main_queue()) {
+                self.map.removeAnnotations(self.map.annotations)
+                self.map.addAnnotations(self.students)
+                
+                let nav = self.tabBarController!.childViewControllers[1] as! UINavigationController
+                let pinListController = nav.topViewController as! PinListViewController
+                pinListController.newDataFlag = true
+            }
+        }
     }
     
     // MARK: MKMapViewDelegate
