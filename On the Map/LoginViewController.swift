@@ -29,6 +29,11 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         fbLoginButton.center = CGPoint(x: self.view.center.x, y: self.view.frame.height - 30)
         fbLoginButton.delegate = self
         self.view.addSubview(fbLoginButton)
+
+        if let accessToken = FBSDKAccessToken.currentAccessToken() {
+            self.setNetworkActivityUI(true)
+            self.loginWithFacebookToken(accessToken.tokenString)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -135,7 +140,11 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             return
         }
         
-        UdacityClient.sharedInstance().loginWithFacebook(FBSDKAccessToken.currentAccessToken().tokenString) { userDetails, error in
+        self.loginWithFacebookToken(FBSDKAccessToken.currentAccessToken().tokenString)
+    }
+    
+    private func loginWithFacebookToken(accessToken: String) {
+        UdacityClient.sharedInstance().loginWithFacebook(accessToken) { userDetails, error in
             
             guard let userDetails = userDetails else {
                 print("error: \(error)")
