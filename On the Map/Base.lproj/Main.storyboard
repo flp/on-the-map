@@ -28,7 +28,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="franklin.pearsall@gmail.com" borderStyle="bezel" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BpS-6H-Cy7">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BpS-6H-Cy7">
                                 <rect key="frame" x="20" y="397" width="560" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="KZn-BI-tDS"/>
@@ -430,7 +430,7 @@
         <image name="list" width="32" height="32"/>
         <image name="map" width="32" height="32"/>
         <image name="pin" width="32" height="32"/>
-        <image name="refresh" width="21" height="26"/>
+        <image name="refresh" width="22" height="22"/>
         <image name="udacity" width="256" height="256"/>
     </resources>
 </document>
