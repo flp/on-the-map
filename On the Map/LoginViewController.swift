@@ -11,7 +11,7 @@ import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 
-class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
+class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -29,6 +29,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         fbLoginButton.center = CGPoint(x: self.view.center.x, y: self.view.frame.height - 30)
         fbLoginButton.delegate = self
         self.view.addSubview(fbLoginButton)
+        
+        self.emailTextField.delegate = self
+        self.passwordTextField.delegate = self
 
         if let accessToken = FBSDKAccessToken.currentAccessToken() {
             self.setNetworkActivityUI(true)
@@ -124,6 +127,17 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         self.indicator.hidden = !enabled
         self.loginButton.enabled = !enabled
         self.fbLoginButton.enabled = !enabled
+    }
+    
+    // MARK: UITextFieldDelegate
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        textField.text = ""
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     // MARK: FBSDKLoginButtonDelegate
